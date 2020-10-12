@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  express: 
+    container_name: express
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      backend:
+        ipv4_address: 10.10.10.2
+    ports: 
+      - 4000:4000
+    volumes: 
+      - "./:/usr/app"
+      - "usr/app/node_modules"
+    depends_on:
+      - mongo
+    env_file: .env
+
+  mongo:
+    image: mongo
+    restart: always
+    container_name: "mongo"
+    networks:
+      backend:
+        ipv4_address: 10.10.10.3
+    ports:
+      - "27017:27017"
+    volumes: 
+      - "../mongo:/data/db"
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    container_name: "mongo-express"
+    networks:
+      backend:
+        ipv4_address: 10.10.10.4
+    ports:
+      - 8081:8081
+    depends_on: 
+      - mongo
+
+networks:
+  backend:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.10.0/24

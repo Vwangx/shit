@@ -1,0 +1,19 @@
+// {
+//   "env": {
+//     "es6": true,
+//     "node": true
+//   },
+//   "extends": ["plugin:prettier/recommended", "airbnb-base"],
+
+//   "plugins": ["prettier"],
+
+//   "rules": {
+//     "prettier/prettier": "error",
+//     "strict": "off",
+//     "no-console": ["error", { "allow": ["warn", "error"] }],
+//     "object-curly-newline": [
+//       "error",
+//       { "ImportDeclaration": "never", "ExportDeclaration": "never" }
+//     ]
+//   }
+// }
